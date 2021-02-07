@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :comments
 
   resources :categories do
-    resources :recipes, only: [:index, :show]
+    resources :recipes, only: [:index, :show, :new]
   end
 
   resources :recipes do
