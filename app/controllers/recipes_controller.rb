@@ -8,30 +8,49 @@ class RecipesController < ApplicationController
     if @category
       @recipes = @category.recipes 
     else
-      @recipes = Recipe.all.alphabetize
+      @recipes = Recipe.all
     end
   end
 
   def new
     @recipe = Recipe.new
+    @recipe.recipe_ingredients.build
   end
 
   def create
+    params[:recipe][:user_id] = current_user.id
     @recipe = Recipe.new(recipe_params)
-    if @recipe.save
-      if @category
-        redirect_to category_recipes_path(@category) 
+      if @recipe.save
+        redirect_to recipe_path(@recipe)
       else
-        redirect_to recipes_path
+        flash.now[:error] = @recipe.errors.full_messages
+        render :new        
       end
+  end
+
+  def show
+    if @category
+      redirect_to category_recipe_path(@category)
+    end
+  end
+
+  def edit
+    
+  end
+
+  def update
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe)
     else
       flash.now[:error] = @recipe.errors.full_messages
-      if @category 
-        render :new_category_recipe
-      else
-        render :new
-      end
+      render :edit
     end
+  end
+
+  def destroy
+    @recipe.destroy
+    flash.now[:notice] = "Recipe has been deleted."
+    redirect_to recipes_path
   end
 
   private
@@ -50,7 +69,18 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
     :title, 
     :description, 
-    instructions_attributes: [:id, :step, :_destroy]
+    :user_id,
+    :category_id,
+    instructions_attributes: [
+      :id, 
+      :step, 
+      :_destroy],
+    recipe_ingredients_attributes: [
+      :measurement,
+      ingredient_attributes: [
+        :ingredient_name
+      ]
+    ]
   )
   end
 
