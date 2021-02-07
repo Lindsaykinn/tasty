@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
         session[:user_id] = @user.id
-        redirect_to recipes_path 
+        redirect_to user_path(@user) 
       else
         flash.now[:notice] = "Email provided already has an account"
         render :new
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
       if @category
         render :show
       end
+      @recipes = @user.recipes
     end
   
     private
