@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to recipes_path
+      redirect_to user_path(@user)
     else
       flash.now[:notice] = "Invalid email or password"
       render :new
@@ -19,16 +19,15 @@ class SessionsController < ApplicationController
 
   def omniauth
     user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.email = auth["info"]["email"]
+      user.name = auth["info"]["name"]
       user.password = SecureRandom.hex(10)
-      user.first_name = auth["info"]["email"]
-      user.last_name = auth["info"]["email"]
-    end
+      user.email = auth["info"]["email"]
+  end
     if user.valid?
       session[:user_id] = user.id
       redirect_to recipes_path
     else
-      redirect_to signup_path
+      redirect_to login_path
     end
   end    
 
