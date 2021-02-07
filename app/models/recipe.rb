@@ -17,7 +17,7 @@ class Recipe < ApplicationRecord
   validates :description, presence: true
 
 
-  scope :alphabetize, -> { order("title asc")}
+  scope :sorted, -> { order("title asc")}
 
   
 
