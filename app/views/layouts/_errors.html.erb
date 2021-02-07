@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="fields_with_errors">
+  <% if flash[:error] %>
+    <% flash[:error].each do |error| %>
+      <p><%= error %> </p>
+      <% end %>
+    <% end %>
+
+
+    <%= content_tag("p", flash[:notice]) if flash[:notice] %>
+  </div>
+</div>
