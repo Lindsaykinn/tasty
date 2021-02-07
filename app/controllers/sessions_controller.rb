@@ -17,19 +17,19 @@ class SessionsController < ApplicationController
     end
   end
 
-  def omniauth
+  def omniauth #if they are logging in with oauth
     user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.email = auth["info"]["email"]
-      user.name = auth["info"]["name"]
-      user.password = SecureRandom.hex(10)
-  end
-    if user.valid?
-      session[:user_id] = user.id
-      redirect_to user_path
+        user.email = auth["info"]["email"]
+        user.password = SecureRandom.hex(15)
+        user.name = auth["info"]["name"]
+        end
+    if user.valid? #if the user exsists then I want to save them into my session
+        session[:user_id] = user.id  
+        redirect_to user_path(user)
     else
-      redirect_to login_path
+        redirect_to login_path
     end
-  end    
+end
 
   def destroy 
     session.clear
@@ -38,9 +38,9 @@ class SessionsController < ApplicationController
 
   private
 
-  def auth
+  def auth 
     request.env['omniauth.auth']
-  end
+end
 
 end
 
