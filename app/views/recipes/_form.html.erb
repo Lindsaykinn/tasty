@@ -19,3 +19,24 @@
       <%= link_to_add_association 'Add Step', f, :instructions %>
       </div>
     </div>
+
+  <h5>Select Category</h5>
+    <div style="margin-left:30px">
+      <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
+    </div>
+
+  <h5>Create Category</h5>
+    <%= f.fields_for :category, recipe.build_category do |cb| %>
+      <div style="margin-left:30px">
+        <%= cb.label :name %>
+        <%= cb.text_field :name %>
+        <%= cb.hidden_field :user_id, value:current_user.id %>
+      </div>
+    <% end %>
+    <%= f.submit button_name, class: "custom_button"%>
+<% end %>
+
+
+<script>$(document).ready(function(){
+    $('select').formSelect();
+  });</script>
