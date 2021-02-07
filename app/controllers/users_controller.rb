@@ -23,9 +23,6 @@ class UsersController < ApplicationController
   
     def show
       @user = User.find_by_id(params[:id])
-      if @category
-        render :show
-      end
       @recipes = @user.recipes
     end
   
