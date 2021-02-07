@@ -1,3 +1,9 @@
 <h4><u><%=@user.name %>'s Recipes</u></h4>
 
-<%= render @user.recipes %>
+<% @recipes.each do |recipe| %>
+<li><%= link_to recipe.title, recipe_path(recipe) %></li>
+<% end %>
+
+
+
+
