@@ -26,6 +26,7 @@ class CategoriesController < ApplicationController
   
     def show
       @category = Category.find_by_id(params[:id])
+      @recipes = @category.recipes
     end
   
     def edit
