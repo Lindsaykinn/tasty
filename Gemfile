@@ -3,6 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
 
+gem 'awesome_print'
+
+gem 'cocoon'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
 # Use sqlite3 as the database for Active Record
@@ -30,7 +35,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
 end
 
 group :development do
