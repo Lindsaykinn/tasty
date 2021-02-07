@@ -20,6 +20,10 @@ Rails.application.routes.draw do
       delete 'delete_selected'
     end
   end
+
+  resources :users, only: [:show, :new] do
+    resources :recipes, only: [:index]
+  end
     
   resources :users
   get '/signup', to: 'users#new', as: 'signup'
