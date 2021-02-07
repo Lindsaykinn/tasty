@@ -1,0 +1,21 @@
+<%= form_for [@category, @recipe] do |f| %>
+ <%= f.hidden_field :user_id, value:current_user.id %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <h5>Add Instructions</h5>
+    <div style="margin-left:30px">
+      <%= f.fields_for :instructions do |instruction| %>
+      <%= render 'instruction_fields', f: instruction %>
+      <% end %>
+      <div class="links">
+      <%= link_to_add_association 'Add Step', f, :instructions %>
+      </div>
+    </div>
