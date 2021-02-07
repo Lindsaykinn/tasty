@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :redirect_if_not_logged_in
+    before_action :find_category, only: [:show, :edit, :update, :destroy]
     
   
     def index
