@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taste</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat:wght@300&family=Sacramento&display=swap" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+  </head>
+
+  <body>
+    <div class="container">
+      <%= yield %>  
+      
+      <% if !user_signed_in? %>
+      <ul>
+        <li><%= link_to "Recipes", recipes_path, class:"custom_button" %></li>
+        <br>
+        <li><%= link_to "Signup", signup_path, class:"custom_button"%></li>
+        <br>
+        <li><%= link_to "Login", login_path, class:"custom_button"%></li>
+        <br>
+        <li><%= link_to 'Log In With Google', '/auth/google_oauth2', method: :post, class:"custom_button"%></li>
+        <br>
+      </ul>
+      <% else %>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: 'DELETE', class:"custom_button" %></li>
+        <br>
+        <li><%= link_to 'Back to Recipes', recipes_path, class: "custom_button" %> </li>
+    </div>
+     <% end %>
+  </body>
+</html>
