@@ -1,0 +1,8 @@
+
+<h3>All Categories</h3>
+
+<ul>
+  <% @categories.each do |category| %>
+  <li style="list-style-type: disc;"> <%= link_to category.name, category_path(category) %></li>
+<% end %>
+</ul>
