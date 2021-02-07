@@ -1,0 +1,17 @@
+<h3>Create Category</h3>
+
+<%= form_for @category do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div> 
+    
+    <%= f.submit "Create Category", class:"custom_button" %>
+  <% end %>
+  <br>
+
+
+
+  <%= link_to "Create Recipe with Category", new_category_path, class: "custom_button" %>
+
+
