@@ -1,26 +1,42 @@
 class CategoriesController < ApplicationController
     before_action :redirect_if_not_logged_in
-    before_action :find_category, only: [:show, :edit, :update, :destroy]
+    before_action :find_recipe, only: [:index, :new, :create]
+    before_action :find_category, only: [:edit, :update, :destroy, :create]
     
   
     def index
-      @categories = Category.all
+      @categories = Category.all.sorted
     end
   
     def new
-      @category = Category.new
-  
+      if @recipe
+        @recipe = @category.recipes.build
+        render :new_recipe_category
+      else
+        @category = Category.new
+        @category.recipes.build  
+      end
     end
   
-    def create
-      params[:category][:user_id] = current_user.id
+    def create     
       @category = Category.new(category_params)
+      @category.user = current_user
+      # params[:category][:user_id] = current_user.id
   
       if @category.save
-        redirect_to categories_path
+        #i don't understand why i need this extra code when params are passed into the build above
+        if @recipe 
+          redirect_to recipe_categories_path(@recipe)
+        else
+          redirect_to categories_path
+        end
       else
         flash.now[:error] = @category.errors.full_messages
-        render :new
+        if @recipe 
+          render :new_recipe_category
+        else
+          render :new
+        end
       end
     end
   
@@ -60,7 +76,13 @@ class CategoriesController < ApplicationController
       @category = Category.find_by_id(params[:id])
     end
 
+    def find_recipe
+      if params[:recipe_id]
+        @recipe = Recipe.find_by_id(params[:recipe_id])
+      end
+    end
+
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :user_id, recipes_id:[])
     end
 end
