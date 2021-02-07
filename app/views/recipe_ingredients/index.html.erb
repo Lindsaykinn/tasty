@@ -3,7 +3,7 @@
 <h4>Ingredients for <%= @recipe.title %></h4>
 <br>
 
-<%= form_tag destroy_multiple_recipe_ingredients_path, method: :delete do %>
+<%= form_tag delete_selected_recipe_ingredients_path, method: :delete do %>
   <% if params[:recipe_id] %>
   <%= hidden_field_tag 'recipe_id', params[:recipe_id] %>
   <% end %>

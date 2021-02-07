@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :recipe_ingredients do
     collection do
-      delete 'destroy_multiple'
+      delete 'delete_selected'
     end
   end
     
