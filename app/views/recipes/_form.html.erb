@@ -11,13 +11,19 @@
   </div>
 
   <h5>Add Ingredients:</h5>
-    <%= f.fields_for :recipe_ingredients do |ri| %>
+    <%= f.fields_for :recipe_ingredient do |ri| %>
     <%= ri.label :measurement %>
     <%= ri.text_field :measurement %>
+   
 
       <%= ri.fields_for :ingredient do |i| %>
         <%= i.label :ingredient_name %>
         <%= i.text_field :ingredient_name %>
+     <div class="links">
+      <%= link_to_add_association "Add Measurement", f, :recipe_ingredients %>
+      <br>
+      <%= link_to_add_association "Add Ingredient Name", f, :ingredients %>
+        </div>
         <% end %>
     <% end %>
 
