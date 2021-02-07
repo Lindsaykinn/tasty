@@ -1,11 +1,10 @@
-
 <h4><%= @recipe.title %></h4>
 
 <div class="container" style="margin-left:35px;">
 
   <h5 style="font-size:1.45rem"> ● Category:</h5>
     <ul>
-      <li style="margin-left:20px;"><%= link_to @category_name, category_path %></li>
+      <li style="margin-left:20px;"><%= link_to @category.name, category_path(@category) %></li>
     </ul>
 
   <h5 style="font-size:1.45rem">● Description:</h5>
@@ -13,20 +12,7 @@
       <li style="margin-left:20px;"><%= @recipe.description %></li>
     </ul>
   
-  <table>
-    <tbody>
-      <thead>
-        <th>Measurement</th>
-        <th>Ingredient</th>
-      </thead>    
-          <% @recipe.recipe_ingredients.each do |ri| %>
-          <tr>
-            <td><%= ri.measurement %></td>
-            <td><%= ri.ingredient.ingredient_name %></td>
-          </tr>
-            <% end %>
-    </tbody>
-  </table>
+
 
   <h5 style="font-size:1.45rem">● Instructions:</h5>
     <ol>
