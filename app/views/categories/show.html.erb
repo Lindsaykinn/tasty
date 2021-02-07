@@ -1,0 +1,10 @@
+<h3>All Recipes for <%= @category.name %> </h3>
+
+<ul>
+  <li><%= render @category.recipes  %> </li>
+</ul>
+<br>
+
+<%= link_to "Edit Category Name", edit_category_path(@category), class:"custom_button" %> &nbsp;
+
+<%= link_to "Create New Recipe for #{@category.name}", new_category_recipe_path(@category), class: "custom_button" %>
