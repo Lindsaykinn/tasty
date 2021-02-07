@@ -1,0 +1,49 @@
+<nav style="background-color: #006a71;">
+<% if user_signed_in? %>
+  <ul id="dropdown1" class="dropdown-content">
+    <li><%= link_to 'All Recipes', recipes_path%></li>
+    <!-- recipe_myrecipes_path -->
+    <li><%= link_to 'My Recipes', user_path(current_user.id) %></li>
+    <li><%= link_to 'Create Recipe', new_recipe_path %></li>
+  </ul>
+  <ul id="dropdown2" class="dropdown-content">
+    <li><%= link_to 'Logout', destroy_user_session_path, method: 'DELETE' %></li>
+  </ul>
+  <ul id="dropdown3" class="dropdown-content">
+    <li><%= link_to 'Category List', categories_path %></li>
+    <li><%= link_to 'Create Category', new_category_path %></li>
+  </ul>
+  <% else %>
+  <ul id="dropdown4" class="dropdown-content">
+    <li><%= link_to 'Login', login_path %></li>
+    <li><%= link_to 'Log In With Google', '/auth/google_oauth2', method: :post %></li>
+    <li><%= link_to 'Create New Account', signup_path %></li>
+  </ul>
+
+<% end %>
+
+  </ul>
+    <div class="nav-wrapper container" >
+      <a href="/" class="brand-logo left" style="font-family: 'Sacramento', cursive; font-size:55px; padding-top:7px;">Taste</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">      
+        
+        <% if user_signed_in? %>
+        <li><a href="#">Hi, &nbsp; <%= current_user.first_name %></a></li>
+        <li><%= link_to 'Home', root_path%></li>
+         <li><a class="dropdown-trigger" data-target="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+         <li><a class="dropdown-trigger" data-target="dropdown1">Recipes<i class="material-icons right">arrow_drop_down</i></a></li>
+         <li><a class="dropdown-trigger" data-target="dropdown3">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
+         <% else %>
+         <li><%= link_to 'Home', root_path%></li>
+         <li><a class="dropdown-trigger" data-target="dropdown4">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+    <% end %>
+    </div>
+
+  </nav>
+
+<script>
+$(document).ready(function(){
+  $(".dropdown-trigger").dropdown();
+});
+</script>
