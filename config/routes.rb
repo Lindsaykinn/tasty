@@ -5,14 +5,12 @@ Rails.application.routes.draw do
 
   resources :ingredients
 
-  resources :comments
 
   resources :categories do
     resources :recipes, only: [:index, :show, :new]
   end
 
   resources :recipes do
-    resources :comments, only: [:index, :new, :create]
     resources :recipe_ingredients, only: [:index, :new, :create]
     resources :categories, only: [:index, :new, :create]
   end  

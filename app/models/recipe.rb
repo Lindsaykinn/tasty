@@ -5,8 +5,6 @@ class Recipe < ApplicationRecord
   belongs_to :category, optional: true
   accepts_nested_attributes_for :category, reject_if: :all_blank
 
-  has_many :comments
-
   has_many :instructions, dependent: :destroy
   accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: true 
 

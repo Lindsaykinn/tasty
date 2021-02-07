@@ -18,14 +18,6 @@ ActiveRecord::Schema.define(version: 2021_02_07_050442) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.integer "recipe_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "ingredients", force: :cascade do |t|
     t.string "ingredient_name"
     t.datetime "created_at", precision: 6, null: false
