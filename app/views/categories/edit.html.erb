@@ -1,0 +1,12 @@
+<h3>Edit <%= @category.name %></h3>
+
+
+    <%= form_for [@category] do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.hidden_field :user_id, value:current_user.id %>
+    </div>
+
+    <%= f.submit button_name:"Update Category", class: "custom_button"%>
+    <% end %>
