@@ -1,12 +1,11 @@
 <h3>All Recipes for <%= @category.name %> </h3>
 
 <ul>
-<% if @category %>
   <% @recipes.each do |recipe| %>
     <li><%= link_to recipe.title, category_recipe_path(@category, recipe)  %> </li>
+<% end %>
 </ul>
-<% end %>
-<% end %>
+
 <br>
 
 <%= link_to "Edit Category Name", edit_category_path(@category), class:"custom_button" %> &nbsp;
