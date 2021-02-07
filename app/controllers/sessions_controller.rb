@@ -19,18 +19,17 @@ class SessionsController < ApplicationController
 
   def omniauth
     user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.email = auth["info"]["email"]
       user.name = auth["info"]["name"]
       user.password = SecureRandom.hex(10)
-      user.email = auth["info"]["email"]
   end
     if user.valid?
       session[:user_id] = user.id
-      redirect_to recipes_path
+      redirect_to user_path
     else
       redirect_to login_path
     end
   end    
-
 
   def destroy 
     session.clear
@@ -45,4 +44,3 @@ class SessionsController < ApplicationController
 
 end
 
-end
