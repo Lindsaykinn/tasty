@@ -1,0 +1,39 @@
+body {
+  background-color: #cbeaed;
+  color: #006a71;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+h3 {
+  letter-spacing:-1px
+}
+
+nav {
+  font-family: 'Merriweather', serif;
+  color: #ffffdd
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.custom_button{
+  background-color: #006a71;
+  background-image: -webkit-linear-gradient(top, #11999E, #006a71);
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  padding:8px;
+  border-radius: 6px;
+  font-weight:bolder;
+}
+
+.custom_button:hover {
+  background:  #11999E;
+  font-weight: bolder;
+}
