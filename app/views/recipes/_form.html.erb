@@ -14,6 +14,11 @@
     <%= f.fields_for :recipe_ingredients do |ri| %>
     <%= ri.label :measurement %>
     <%= ri.text_field :measurement %>
+
+      <%= ri.fields_for :ingredient do |i| %>
+        <%= i.label :ingredient_name %>
+        <%= i.text_field :ingredient_name %>
+        <% end %>
     <% end %>
 
   <h5>Add Instructions:</h5>
