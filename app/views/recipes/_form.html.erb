@@ -10,17 +10,16 @@
   </div>
 
  
-
+   <h5>Add Instructions</h5>
     <div style="margin-left:30px">
-      <%= f.fields_for :instructions, @recipe.instructions do |instruction| %>
-      <h5>Add Instructions:</h5>
+      <%= f.fields_for :instructions do |instruction| %>
       <%= render 'instruction_fields', f: instruction %>
       <% end %>
       <div class="links">
       <%= link_to_add_association 'Add Step', f, :instructions %>
       </div>
     </div>
-
+    
   <h5>Select Category</h5>
     <div style="margin-left:30px">
       <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
