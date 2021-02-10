@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   
-  resources :instructions
   root to: 'static#home'
-
-  resources :ingredients
+  
+  resources :instructions
 
 
   resources :categories do
@@ -11,15 +10,9 @@ Rails.application.routes.draw do
   end
 
   resources :recipes do
-    resources :recipe_ingredients, only: [:index, :new, :create]
     resources :categories, only: [:index, :new, :create]
   end  
 
-  resources :recipe_ingredients do
-    collection do
-      delete 'delete_selected'
-    end
-  end
 
   resources :users, only: [:show, :new] do
     resources :recipes, only: [:index]
