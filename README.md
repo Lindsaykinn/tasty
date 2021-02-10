@@ -1,24 +1,10 @@
-# README
+# README for Taste Rails App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Taste is an application built with Ruby on Rails to house & share recipes.
 
-Things you may want to cover:
+Ruby version '2.6.1'
 
-* Ruby version
+* Additional gems:
+  Cocoon for nested forms
+  Omniauth for Google login
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
