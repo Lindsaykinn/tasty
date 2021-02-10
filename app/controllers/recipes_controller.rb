@@ -11,6 +11,9 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all.sorted
     end
+    if !params[:q].blank?
+      @recipes = @recipes.search(params[:q].downcase)
+    end
   end
 
   def new
@@ -58,6 +61,9 @@ class RecipesController < ApplicationController
       @recipe.update(recipe_params)
       flash.now[:notice] = "#{@recipe.title} has been updated."
       redirect_to recipe_path
+    end
+    if @category
+      recipe.build_category
     end
   end
 

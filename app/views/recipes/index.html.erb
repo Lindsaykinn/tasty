@@ -1,8 +1,14 @@
 <h3>All <%= @category.name if @category %> Recipes</h3>
 
+<%= form_tag recipes_path, :method => "get" do %>
+  <%= label_tag(:q, "Search All Recipes:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search", class: "custom_button") %>
+<% end %>
 
 <ul>
   <%@recipes.each do |recipe| %>
   <li><%= link_to recipe.title, recipe_path(recipe) %></li>
   <% end %>
 </ul>
+

@@ -14,6 +14,9 @@ class Recipe < ApplicationRecord
 
   scope :sorted, -> { order("title asc")}
 
-  
+
+  def self.search(params)
+    where("LOWER(title) LIKE ?", "%#{params}%")
+  end
 
 end
