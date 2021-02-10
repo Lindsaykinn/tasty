@@ -24,7 +24,6 @@ class CategoriesController < ApplicationController
       # params[:category][:user_id] = current_user.id
   
       if @category.save
-        #i don't understand why i need this extra code when params are passed into the build above
         if @recipe 
           redirect_to recipe_categories_path(@recipe)
         else
