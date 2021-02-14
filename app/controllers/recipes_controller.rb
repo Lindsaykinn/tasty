@@ -18,7 +18,6 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    # @recipe.instructions.build
   end
 
   def create
@@ -112,7 +111,9 @@ class RecipesController < ApplicationController
     category_attributes: [:name],
     instructions_attributes: [:id,
       :step, :_destroy
-      ]    
+      ],
+    ingredients_attributes: [:id,
+      :ingredient_name, :_destroy]
   )
   end
 

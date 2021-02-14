@@ -11,8 +11,13 @@
     <ul>
       <li style="margin-left:20px;"><%= @recipe.description %></li>
     </ul>
-  
 
+  <h5 style="font-size:1.45rem">● Ingredients:</h5>
+    <ul>
+      <% for @ingredient in @recipe.ingredients %>
+        <li style="margin-left:20px;"><%= @ingredient.ingredient_name %></li>
+        <% end %>    
+    </ul>
 
   <h5 style="font-size:1.45rem">● Instructions:</h5>
     <ol>
@@ -21,20 +26,18 @@
         <% end %>    
     </ol>
 
-<h5 style="font-size:1.45rem">● Recipe Comments:</h5>
-<div style="margin-left:25px;">
-  <%= render partial: 'comments/comments_list', locals: {comments: @recipe.comments, recipe: @recipe} if @recipe.comments %>
-  
-</div>
-<br>
+  <h5 style="font-size:1.45rem">● Recipe Comments:</h5>
+    <div style="margin-left:25px;">
+      <%= render partial: 'comments/comments_list', locals: {comments: @recipe.comments, recipe: @recipe} if @recipe.comments %>
+    </div>
 
+<br>
 
   <h5>Add Recipe Comments:</h5>
     <%= render 'comments/form', comment: @recipe.comments.new, recipe: @recipe %>   
 
-  <br>
-  <br>
-
+<br>
+<br>
 
 <div>
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class:"custom_button" %>

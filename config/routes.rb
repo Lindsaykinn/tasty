@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :instructions
 
+  resources :ingredients
 
   resources :categories do
     resources :recipes, only: [:index, :show, :new]
