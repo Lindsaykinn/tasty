@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.category.user = current_user
+    @recipe.user_id = current_user.id
       if @recipe.save
         if @category
           redirect_to category_recipes_path(@category) 
@@ -54,22 +54,22 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if current_user.id != @recipe.category.user_id
+    if current_user.id != @recipe.user_id
+      flash.now[:notice] = "You cannot update a recipe that you did not author."
       redirect_to recipes_path
-      flash.now[:error] = "You cannot update a recipe that you did not author."
     else
       if @recipe.update(recipe_params)
-        flash.now[:error] = "#{@recipe.title} has been updated."
+        flash.now[:notice] = "#{@recipe.title} has been updated."
         redirect_to recipe_path(@recipe)
       else
         flash.now[:error] = @recipe.errors.full_messages 
-        redirect_to recipes_path
+        render :edit
       end
     end
   end
 
   def destroy
-    if current_user.id != @recipe.category.user_id
+    if current_user.id != @recipe.user_id
       flash.now[:error] = @recipe.errors.full_messages
       redirect_to recipes_path
     else
@@ -105,7 +105,10 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
     :title, 
     :description,
+    :category_name, 
+    :content,
     :category_id,
+    :user_id,
     category_attributes: [:name],
     instructions_attributes: [:id,
       :step, :_destroy

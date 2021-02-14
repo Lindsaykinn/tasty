@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   
-  has_many :categories
-  has_many :recipes, through: :categories
+  has_many :recipes
+  has_many :categories, through: :recipes
   
   validates :name, presence: true
 

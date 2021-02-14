@@ -34,7 +34,7 @@ description: "Tasty sandwich"},
 description: "Mexican staple"},
   {title: "Hummus",
   category_id: 2,
-description: "Easy dip"},
+description: "Easy dip"}
 ])
 
 Instruction.create([
@@ -43,5 +43,5 @@ Instruction.create([
   {step: "Blend chick peas with tahini and serve.",
   recipe_id: 3},
   {step: "Brown meat, chop veggies, and serve.",
-  recipe_id: 2},
+  recipe_id: 2}
 ])
