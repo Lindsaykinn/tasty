@@ -8,7 +8,7 @@
 
 <ul>
   <%@recipes.each do |recipe| %>
-  <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+  <li><%= link_to recipe.title, recipe_path(recipe) %> by <%= recipe.user.name %></li>
   <% end %>
 </ul>
 
