@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  
   root to: 'static#home'
+  
+  resources :comments, only: [:destroy, :new, :update]
   
   resources :instructions
 
@@ -12,6 +13,10 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :categories, only: [:index, :new, :create]
   end  
+
+  resources :recipes do
+    resources :comments
+  end
 
 
   resources :users, only: [:show, :new, :index] do
