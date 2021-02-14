@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :find_category, only: [:index, :new, :create, :edit, :update]
+  before_action :find_category, only: [:index, :new, :create]
   # before_action :redirect_if_not_owner, only: [:edit, :update]
 
   def index
@@ -53,17 +53,18 @@ class RecipesController < ApplicationController
     
   end
 
-  def update    
+  def update
     if current_user.id != @recipe.category.user_id
-      flash.now[:notice] = "You cannot update a recipe that you did not author."
       redirect_to recipes_path
+      flash.now[:error] = "You cannot update a recipe that you did not author."
     else
-      @recipe.update(recipe_params)
-      flash.now[:notice] = "#{@recipe.title} has been updated."
-      redirect_to recipe_path
-    end
-    if @category
-      recipe.build_category
+      if @recipe.update(recipe_params)
+        flash.now[:error] = "#{@recipe.title} has been updated."
+        redirect_to recipe_path(@recipe)
+      else
+        flash.now[:error] = @recipe.errors.full_messages 
+        redirect_to recipes_path
+      end
     end
   end
 

@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :redirect_if_not_logged_in
-    before_action :find_recipe, only: [:index, :new, :create]
+    before_action :find_recipe, only: [:index, :new, :create, :edit, :update]
     before_action :find_category, only: [:edit, :update, :destroy, :create]
     
   
