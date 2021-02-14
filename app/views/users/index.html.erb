@@ -1,0 +1,9 @@
+<h4><u><%=@user.name %>'s Recipes</u></h4>
+
+<% @user.recipes.each do |recipe| %>
+<li><%= link_to recipe.title, user_recipes_path(@user) %></li>
+<% end %>
+
+
+
+
