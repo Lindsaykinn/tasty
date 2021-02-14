@@ -1,6 +1,6 @@
 <h3>Create Recipe</h3>
 
-<%= render partial: "form", locals: {recipe: @recipe, category if @category,  button_name: "Create Recipe"} %>
+<%= render partial: "form", locals: {category if category, recipe: @recipe, button_name: "Create Recipe"} %>
 
 
 <script>$(document).ready(function(){
