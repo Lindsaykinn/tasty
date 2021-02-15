@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:edit, :update, :destroy]
-  before_action :comment_auth, only: [:edit, :update, :destroy]
+  before_action :comment_auth, only: [:edit, :update]
 
   def new 
     @comment = Comment.new
@@ -39,13 +39,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @comment.user
-    @comment = current_user.comments.find(params[:id])
-    @comment.destroy
-    flash[:notice] = "The comment was deleted."
-    redirect_to recipes_path
+    if  @comment.user_id != current_user.id
+      flash.now[:error] = @comment.errors.full_messages
+      redirect_to recipe_path(@comment.recipe)
     else
-    redirect_to recipes_path
+      @comment.destroy
+      flash.now[:error] = @comment.errors.full_messages
+      redirect_to recipe_path(@comment.recipe)    
     end
   end
 
