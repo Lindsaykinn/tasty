@@ -1,8 +1,8 @@
 class RecipesController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_not_owner, only: [:edit, :update, :destroy]
   before_action :find_category, only: [:index, :new, :create]
-  # before_action :redirect_if_not_owner, only: [:edit, :update]
 
   def index
     @recipes = Recipe.all
@@ -53,27 +53,27 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if current_user.id != @recipe.user_id
-      flash.now[:notice] = "You cannot update a recipe that you did not author."
-      redirect_to recipes_path
-    else
+    # if current_user.id != @recipe.user_id
+    #   flash.now[:notice] = "You cannot update a recipe that you did not author."
+    #   redirect_to recipes_path
+    # else
       if @recipe.update(recipe_params)
-        flash.now[:notice] = "#{@recipe.title} has been updated."
+        flash[:notice] = "#{@recipe.title} has been updated."
         redirect_to recipe_path(@recipe)
       else
-        flash.now[:error] = @recipe.errors.full_messages 
+        flash[:error] = @recipe.errors.full_messages 
         render :edit
       end
-    end
+    # end
   end
 
   def destroy
     if current_user.id != @recipe.user_id
-      flash.now[:error] = @recipe.errors.full_messages
+      flash[:error] = @recipe.errors.full_messages
       redirect_to recipes_path
     else
       @recipe.destroy
-      flash.now[:notice] = "#{@recipe.title} has been deleted."
+      flash[:notice] = "#{@recipe.title} has been deleted."
       redirect_to recipes_path    
     end
   end
@@ -88,14 +88,13 @@ class RecipesController < ApplicationController
     if params[:category_id]
       @category = Category.find_by_id(params[:id])
     end
+  end
   
-  # def redirect_if_not_owner
-  #   if current_user.id != @recipe.category.user
-  #     flash[:notice] = "You cannot delete or update a recipe if you are not the owner."
-  #     return redirect_to recipe_path unless @recipe 
-  #     redirect_to recipe_path unless current_user.id == @recipe.category.user_id
-  #     end
-  #   end   
+  def redirect_if_not_owner
+    unless current_user == @recipe.user 
+      redirect_to recipes_path
+      flash[:error] = ["No."]
+    end
   end
 
 
