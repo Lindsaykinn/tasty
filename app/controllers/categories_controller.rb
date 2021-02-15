@@ -20,8 +20,6 @@ class CategoriesController < ApplicationController
   
     def create     
       @category = Category.new(category_params)
-      @category.user = current_user
-      # params[:category][:user_id] = current_user.id
   
       if @category.save
         if @recipe 
