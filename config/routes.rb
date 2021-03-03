@@ -7,17 +7,20 @@ Rails.application.routes.draw do
 
   resources :ingredients
 
+  get '/categories/recent_category', to: 'categories#recent_category'
+
   resources :categories do
     resources :recipes, only: [:index, :show, :new]
   end
 
-  resources :recipes do
-    resources :categories, only: [:index, :new, :create]
-  end  
+  # resources :recipes do
+  #   resources :categories, only: [:index, :new, :create]
+  # end  
 
   resources :recipes do
     resources :comments
   end
+
 
 
   resources :users, only: [:show, :new, :index] do

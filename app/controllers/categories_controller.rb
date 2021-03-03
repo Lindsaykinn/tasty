@@ -3,6 +3,11 @@ class CategoriesController < ApplicationController
     before_action :find_recipe, only: [:index, :new, :create, :edit, :update]
     before_action :find_category, only: [:edit, :update, :destroy, :create]
     
+
+    def recent_category
+      @categories = Category.recent_category
+      render :index
+    end
   
     def index
       @categories = Category.all.sorted
@@ -14,26 +19,26 @@ class CategoriesController < ApplicationController
         render :new_recipe_category
       else
         @category = Category.new
-        @category.recipes.build  
       end
+        @category.recipes.build  
     end
   
     def create     
       @category = Category.new(category_params)
   
       if @category.save
-        if @recipe 
-          redirect_to recipe_categories_path(@recipe)
-        else
+        # if @recipe 
+        #   redirect_to recipe_categories_path(@recipe)
+        # else
           redirect_to categories_path
-        end
-      else
+        # end
+      # else
         flash.now[:error] = @category.errors.full_messages
-        if @recipe 
-          render :new_recipe_category
+        # if @recipe 
+        #   render :new_recipe_category
         else
           render :new
-        end
+        # end
       end
     end
   
@@ -60,7 +65,7 @@ class CategoriesController < ApplicationController
       @category.destroy
       flash[:notice] = "#{@category.name} was deleted."
       redirect_to category_path
-      # elsif @category.recipe
+      # if @category.recipe
       #   flash[:notice] = "#{@category.name} is associated with an existing recipe and cannot be deleted."
       # end
     end

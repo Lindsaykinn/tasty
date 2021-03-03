@@ -7,4 +7,8 @@ class Category < ApplicationRecord
 
   scope :sorted, -> { order("name asc")}
 
+  def self.recent_category
+    Category.order(created_at: :desc).limit(1)
+  end
+
 end
