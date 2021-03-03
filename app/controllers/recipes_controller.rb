@@ -5,12 +5,7 @@ class RecipesController < ApplicationController
   before_action :find_category, only: [:index, :new, :create]
 
   def index
-    @recipes = Recipe.all
-    if @category
-      @recipes = @category.recipes 
-    else
-      @recipes = Recipe.all.sorted
-    end
+    @recipes = Recipe.all.sorted 
     if !params[:q].blank?
       @recipes = @recipes.search(params[:q].downcase)
     end
@@ -24,18 +19,18 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
       if @recipe.save
-        if @category
-          redirect_to category_recipes_path(@category) 
-        else
+        # if @category
+        #   redirect_to category_recipes_path(@category) 
+        # else
           redirect_to recipes_path
-        end
+        # end
       else
         flash.now[:error] = @recipe.errors.full_messages
-        if @category 
-        render :new_category_recipe
-        else
+        # if @category 
+        # render :new_category_recipe
+        # else
         render :new
-        end
+        # end
       end
     end
 
@@ -107,7 +102,7 @@ class RecipesController < ApplicationController
     :content,
     :category_id,
     :user_id,
-    category_attributes: [:name],
+    # category_attributes: [:name],
     instructions_attributes: [:id,
       :step, :_destroy
       ],

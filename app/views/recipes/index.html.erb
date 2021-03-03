@@ -1,5 +1,6 @@
-<h3>All <%= @category.name if @category %> Recipes</h3>
+<h3>All Recipes</h3>
 
+<!--form_tag builds a simple form in HTML using the path we pass it, method should be specified -->
 <%= form_tag recipes_path, :method => "get" do %>
   <%= label_tag(:q, "Search All Recipes:") %>
   <%= text_field_tag(:q) %>
@@ -8,7 +9,7 @@
 
 <ul>
   <%@recipes.each do |recipe| %>
-  <li><%= link_to recipe.title, recipe_path(recipe) %> by <%= recipe.user.name %></li>
+  <li><%= link_to recipe.title, recipe_path(recipe) %> by <%= recipe.user.name %> - Instructions count: <%=recipe.instructions.count%>
   <% end %>
 </ul>
 

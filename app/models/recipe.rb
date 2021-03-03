@@ -2,7 +2,7 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
-  accepts_nested_attributes_for :category, reject_if: :all_blank
+  # accepts_nested_attributes_for :category, reject_if: :all_blank
 
   has_many :instructions, dependent: :destroy
   accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: true 

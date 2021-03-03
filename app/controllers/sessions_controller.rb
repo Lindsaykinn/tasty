@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
         user.password = SecureRandom.hex(15)
         user.name = auth["info"]["name"]
         end
-    if user.valid? #if the user exsists then I want to save them into my session
+    if user.valid? #if the user exists then I want to save them into my session
         session[:user_id] = user.id  
         redirect_to user_path(user)
     else
