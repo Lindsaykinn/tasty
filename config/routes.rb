@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/categories/recent_category', to: 'categories#recent_category'
 
+  get '/friends', to: 'users#friends'
+
   resources :categories do
     resources :recipes, only: [:index, :show, :new]
   end
